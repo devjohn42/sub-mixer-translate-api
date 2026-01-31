@@ -30,10 +30,14 @@
 		"rules": {
 			"recommended": true,
 			"style": {
-				"noNonNullAssertion": "off"
+				"noNonNullAssertion": "off",
+				 "useTemplate": "off"
 			},
 			"suspicious": {
         "noExplicitAny": "off"
+      },
+			"correctness": {
+        "noUnusedPrivateClassMembers": "warn"
       }
 		}
 	},
