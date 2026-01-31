@@ -5,6 +5,7 @@ import {
 	validatorCompiler,
 	type ZodTypeProvider
 } from 'fastify-type-provider-zod'
+import { ApiUsageRoute } from './routes/api-usage.route'
 import { getApiHealthRoute } from './routes/get-api-health.route'
 import { getSupportedLanguagesRoute } from './routes/get-supported-languages.route'
 import { validateSubtitleRoute } from './routes/validate-subtitle.route'
@@ -19,6 +20,7 @@ app.setValidatorCompiler(validatorCompiler)
 app.setSerializerCompiler(serializerCompiler)
 
 app.register(getApiHealthRoute)
+app.register(ApiUsageRoute)
 app.register(getSupportedLanguagesRoute)
 app.register(validateSubtitleRoute)
 

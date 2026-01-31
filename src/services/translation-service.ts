@@ -2,7 +2,7 @@ import type { LanguageCode } from 'deepl-node'
 import * as deepl from 'deepl-node'
 import { env } from '../env'
 
-type LanguageCodeType = deepl.TargetLanguageCode | deepl.SourceLanguageCode
+// type LanguageCodeType = deepl.TargetLanguageCode | deepl.SourceLanguageCode
 
 export class TranslationService {
 	private static instance: TranslationService
