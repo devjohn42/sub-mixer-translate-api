@@ -5,8 +5,9 @@ import {
 	validatorCompiler,
 	type ZodTypeProvider
 } from 'fastify-type-provider-zod'
-import { getApiHealth } from './routes/get-api-health.route'
-import { getSupportedLanguages } from './routes/get-supported-languages.route'
+import { getApiHealthRoute } from './routes/get-api-health.route'
+import { getSupportedLanguagesRoute } from './routes/get-supported-languages.route'
+import { validateSubtitleRoute } from './routes/validate-subtitle.route'
 
 const app = fastify().withTypeProvider<ZodTypeProvider>()
 
@@ -17,8 +18,9 @@ app.register(fastifyCors, {
 app.setValidatorCompiler(validatorCompiler)
 app.setSerializerCompiler(serializerCompiler)
 
-app.register(getApiHealth)
-app.register(getSupportedLanguages)
+app.register(getApiHealthRoute)
+app.register(getSupportedLanguagesRoute)
+app.register(validateSubtitleRoute)
 
 app.listen({ port: 3333 }).then(() => {
 	console.log('🎬 Sub Mixer Translate API is Running')

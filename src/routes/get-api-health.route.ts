@@ -1,6 +1,6 @@
 import type { FastifyPluginAsyncZod } from 'fastify-type-provider-zod'
 
-export const getApiHealth: FastifyPluginAsyncZod = async (app) => {
+export const getApiHealthRoute: FastifyPluginAsyncZod = async (app) => {
 	app.get('/health', async () => {
 		return {
 			status: 'ok',
