@@ -70,7 +70,17 @@ export const parseSRT = (content: string): SubtitleBlock[] => {
  * Gera arquivo SRT a partir de blocos
  * Usa CRLF (Windows) para compatibilidade
  */
-export const getSRTStats = (content: string): SRTStatsProps => {
+export const generateSRT = (blocks: SubtitleBlock[], useCRLF: boolean = true): string => {
+	const lineEnding = useCRLF ? '\r\n' : '\n'
+
+	return blocks
+		.map((block) => {
+			return `${block.index}${lineEnding}${block.timestamp}${lineEnding}${block.text}${lineEnding}`
+		})
+		.join(lineEnding)
+}
+
+export const getStats = (content: string): SRTStatsProps => {
 	const blocks = parseSRT(content)
 	const texts = blocks.map((b) => b.text)
 	const totalCharacters = texts.join('').length

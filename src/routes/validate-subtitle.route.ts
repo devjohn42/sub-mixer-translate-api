@@ -1,5 +1,5 @@
 import type { FastifyPluginAsyncZod } from 'fastify-type-provider-zod'
-import { getSRTStats, parseSRT } from '../utils/subtitle-parser'
+import { getStats, parseSRT } from '../utils/subtitle-parser'
 import { validateSubtitleSchema } from './schema'
 
 export const validateSubtitleRoute: FastifyPluginAsyncZod = async (app) => {
@@ -19,7 +19,7 @@ export const validateSubtitleRoute: FastifyPluginAsyncZod = async (app) => {
 			}
 
 			// Retornar estatísticas
-			const stats = getSRTStats(subtitle)
+			const stats = getStats(subtitle)
 
 			return {
 				success: true,

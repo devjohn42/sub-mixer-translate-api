@@ -1,8 +1,6 @@
-import type { LanguageCode } from 'deepl-node'
 import * as deepl from 'deepl-node'
+import type { LanguageCode } from '../config/languages'
 import { env } from '../env'
-
-// type LanguageCodeType = deepl.TargetLanguageCode | deepl.SourceLanguageCode
 
 export class TranslationService {
 	private static instance: TranslationService
@@ -29,22 +27,30 @@ export class TranslationService {
 	/**
 	 * Mapeia códigos de idioma para formato DeepL
 	 */
-	private mapSourceLanguageCode(code: LanguageCode): deepl.SourceLanguageCode | null {
-		const map: Partial<Record<LanguageCode, deepl.SourceLanguageCode>> = {
-			pt: 'pt',
-			en: 'en',
-			ja: 'ja'
+	private sourceLanguageCode(code: LanguageCode): deepl.SourceLanguageCode | null {
+		switch (code) {
+			case 'pt':
+				return 'pt'
+			case 'en':
+				return 'en'
+			case 'ja':
+				return 'ja'
+			default:
+				return null
 		}
-		return map[code] ?? null
 	}
 
-	private mapTargetLanguageCode(code: LanguageCode): deepl.TargetLanguageCode {
-		const map: Partial<Record<LanguageCode, deepl.SourceLanguageCode>> = {
-			pt: 'pt',
-			en: 'en',
-			ja: 'ja'
+	private targetLanguageCode(code: LanguageCode): deepl.TargetLanguageCode {
+		switch (code) {
+			case 'pt':
+				return 'pt-BR'
+			case 'en':
+				return 'en-US'
+			case 'ja':
+				return 'ja'
+			default:
+				return 'en-US'
 		}
-		return map[code] as any
 	}
 
 	/**
@@ -62,8 +68,8 @@ export class TranslationService {
 		try {
 			const result = await this.translator.translateText(
 				text,
-				this.mapSourceLanguageCode(sourceLang),
-				this.mapTargetLanguageCode(targetLang),
+				this.sourceLanguageCode(sourceLang),
+				this.targetLanguageCode(targetLang),
 				{
 					preserveFormatting: true, // Preserva quebras de linha
 					tagHandling: 'html' // Preserva tags HTML como <i>
@@ -115,8 +121,8 @@ export class TranslationService {
 
 				const results = await this.translator.translateText(
 					batch,
-					this.mapSourceLanguageCode(sourceLang),
-					this.mapTargetLanguageCode(targetLang),
+					this.sourceLanguageCode(sourceLang),
+					this.targetLanguageCode(targetLang),
 					{
 						preserveFormatting: true,
 						tagHandling: 'html'
