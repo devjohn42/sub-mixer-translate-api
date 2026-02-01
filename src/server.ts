@@ -8,6 +8,7 @@ import {
 import { ApiUsageRoute } from './routes/api-usage.route'
 import { getApiHealthRoute } from './routes/get-api-health.route'
 import { getSupportedLanguagesRoute } from './routes/get-supported-languages.route'
+import { translateSubtitleRoute } from './routes/translate-subtitle.route'
 import { validateSubtitleRoute } from './routes/validate-subtitle.route'
 
 const app = fastify().withTypeProvider<ZodTypeProvider>()
@@ -23,6 +24,7 @@ app.register(getApiHealthRoute)
 app.register(ApiUsageRoute)
 app.register(getSupportedLanguagesRoute)
 app.register(validateSubtitleRoute)
+app.register(translateSubtitleRoute)
 
 app.listen({ port: 3333 }).then(() => {
 	console.log('🎬 Sub Mixer Translate API is Running')
